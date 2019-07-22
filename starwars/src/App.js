@@ -11,7 +11,8 @@ const App = () => {
 
   const [data, setData] = useState([])
   const [page, setPage] = useState(1)
-  const [content, setContent] = useState(['people'])
+  const [content, setContent] = useState('people')
+  console.log('content', content);
 
 
   const pageUp = () => {
@@ -24,8 +25,8 @@ const App = () => {
   }
 
   const changeContent = (event) => {
-    setContent({value: event.target.value});
-    console.log('content', content);
+    setContent(event.target.value);
+    console.log('etv', event.target.value);
   }
 
 
@@ -35,7 +36,7 @@ const App = () => {
       const charData = response.data.results;
       setData(charData);
     });
-}, [page]);
+}, [page, content]);
 
   if (data.length === 0)
     return <div>Now Loading...</div>
@@ -48,6 +49,7 @@ const App = () => {
         changeContent={changeContent}
       />
       <PersonGrid
+        content={content}
         charData={data}
        />
       <Buttons
